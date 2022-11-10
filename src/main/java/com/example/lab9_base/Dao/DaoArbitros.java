@@ -35,6 +35,24 @@ public class DaoArbitros extends DaoBase{
         /*
         Inserte su código aquí
         */
+        
+        String sql = "insert into arbitro (nombre,pais) values (?,?)";
+
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstm = conn.prepareStatement(sql)){
+
+            pstm.setString(1,arbitro.getNombre());
+            pstm.setString(2,arbitro.getPais());
+
+
+
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
     }
 
     public ArrayList<Arbitro> busquedaPais(String pais) {
@@ -43,6 +61,29 @@ public class DaoArbitros extends DaoBase{
         /*
         Inserte su código aquí
         */
+        String sql = "select * \n" +
+                "\tfrom arbitro\n" +
+                "\twhere pais = ?";
+
+        try (Connection conn = getConnection();
+
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setString(1,pais);
+            ResultSet rs = pstm.executeQuery();
+
+            while(rs.next()){
+                Arbitro arbitro = new Arbitro();
+                arbitro.setNombre(rs.getString(2));
+                arbitro.setIdArbitro(rs.getInt(1));
+                arbitro.setPais(rs.getString(3));
+                arbitros.add(arbitro);
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
         return arbitros;
     }
 
@@ -52,6 +93,33 @@ public class DaoArbitros extends DaoBase{
         /*
         Inserte su código aquí
         */
+        String sql = "select *\n" +
+                "                from arbitro\n" +
+                "                where nombre like \"%?%\"";
+
+        try (Connection conn = getConnection();
+
+             PreparedStatement pstm = conn.prepareStatement(sql)){
+
+            pstm.setString(1,nombre);
+
+            ResultSet rs = pstm.executeQuery();
+
+            while(rs.next()){
+                Arbitro arbitro = new Arbitro();
+                arbitro.setNombre(rs.getString(2));
+                arbitro.setIdArbitro(rs.getInt(1));
+                arbitro.setPais(rs.getString(3));
+
+                arbitros.add(arbitro);
+
+            }
+
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
         return arbitros;
     }
 
@@ -60,6 +128,29 @@ public class DaoArbitros extends DaoBase{
         /*
         Inserte su código aquí
         */
+        String sql = "select * from arbitro where idArbitro = ?";
+
+        try (Connection conn = getConnection();
+
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+
+            pstm.setInt(1,id);
+
+            ResultSet rs = pstm.executeQuery();
+            if(rs.next()){
+                arbitro.setNombre(rs.getString(2));
+                arbitro.setIdArbitro(rs.getInt(1));
+                arbitro.setPais(rs.getString(3));
+
+
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        
+        
         return arbitro;
     }
 
@@ -67,5 +158,17 @@ public class DaoArbitros extends DaoBase{
         /*
         Inserte su código aquí
         */
+        String sql = "Delete from arbitro where idArbitro = ?";
+
+            try (Connection conn = getConnection();
+
+                 PreparedStatement pstm = conn.prepareStatement(sql)) {
+                pstm.setInt(1,id);
+                pstm.executeUpdate();
+
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        
     }
 }
