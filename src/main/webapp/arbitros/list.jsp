@@ -1,4 +1,22 @@
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.example.lab9_base.Bean.Arbitro" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<%ArrayList<Arbitro> Arbitros = (ArrayList<Arbitro>) request.getAttribute("arbitros"); %>
+<% ArrayList<String> buscarPor  = (ArrayList<String>) request.getAttribute("buscarPor");%>
+<%String buscado = (String) request.getAttribute("buscado");%>
+<%
+    ArrayList<String> buscarPor2 = new ArrayList<>();
+    buscarPor2.add("pais");
+    buscarPor2.add("nombre");
+
+    String tipo = (String) request.getAttribute("tipo");
+
+    if(tipo==null){
+        tipo="vacio";
+    }
+%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -24,10 +42,25 @@
                     <div class="col-lg-3">
                         <select name="tipo" class="form-control">
                             <%--                    ACA DEBE COLOCAR LA LISTA DE OPCIONES MOSTRADAS EN EL SERVLET--%>
+
+
+
+                                <%if(tipo.equals("nombre") || tipo.equals("vacio")){%>
+
+                                    <% for (String s : buscarPor){ %>
+                                    <option value="<%=s%>"><%=s%></option>
+
+                                    <%}%>
+                                <%}else if(tipo.equals("pais")){%>
+                                    <% for (String s : buscarPor2){ %>
+                                    <option value="<%=s%>"><%=s%></option>
+
+                                    <%}%>
+                                <%}%>
                         </select>
                     </div>
                     <div class="col-lg-5">
-                        <input type="text" class="form-control" name="buscar">
+                        <input type="text" class="form-control" name="buscar" value="<%=buscado!=null?buscado:""%>">
                     </div>
                     <div class="col-lg-2">
                         <button type="submit" class="btn btn-primary">Buscar</button>
@@ -45,16 +78,19 @@
                     <th>Pais</th>
                     <th></th>
                 </tr>
+                <% for (Arbitro arbitro : Arbitros) { %>
                 <tr>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><%=arbitro.getIdArbitro()%></td>
+                    <td><%=arbitro.getNombre()%></td>
+                    <td><%=arbitro.getPais()%></td>
+
                     <td>
-                        <a href="<%=request.getContextPath()%>/ArbitroServlet?action=borrar&id=">
+                        <a href="<%=request.getContextPath()%>/ArbitroServlet?action=borrar&id=<%=arbitro.getIdArbitro()%>">
                             Borrar
                         </a>
                     </td>
                 </tr>
+                <% } %>
             </table>
         </div>
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

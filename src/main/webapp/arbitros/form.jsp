@@ -30,7 +30,7 @@
                             <select name="pais" class="form-control" required>
                                 <%--  COLOCAR LISTA DE PAÍSES BRINDADA EN EL SERVLET--%>
                                     <% for (String a : paises) { %>
-                                    <option value="pais" >a</option>
+                                    <option value="<%=a%>" ><%=a%></option>
                                     <% } %>
 
                             </select>

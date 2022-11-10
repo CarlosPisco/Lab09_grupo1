@@ -82,14 +82,14 @@ public class DaoArbitros extends DaoBase{
 
         ArrayList<Arbitro> arbitros = new ArrayList<>();
         String sql = "select *\n" +
-                "                from arbitro\n" +
-                "                where nombre like \"%?%\"";
+                "from arbitro\n" +
+                "where nombre like ?";
 
         try (Connection conn = getConnection();
 
              PreparedStatement pstm = conn.prepareStatement(sql)){
 
-            pstm.setString(1,nombre);
+            pstm.setString(1,"%"+nombre+"%");
 
             ResultSet rs = pstm.executeQuery();
 

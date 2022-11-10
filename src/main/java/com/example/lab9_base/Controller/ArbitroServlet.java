@@ -1,5 +1,6 @@
 package com.example.lab9_base.Controller;
 
+import com.example.lab9_base.Bean.Arbitro;
 import com.example.lab9_base.Dao.DaoArbitros;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
@@ -18,6 +19,8 @@ public class ArbitroServlet extends HttpServlet {
         ArrayList<String> opciones = new ArrayList<>();
         opciones.add("nombre");
         opciones.add("pais");
+        ArrayList<Arbitro> listaArbitros = new ArrayList<>();
+        DaoArbitros daoArbitros = new DaoArbitros();
 
         switch (action) {
 
@@ -25,8 +28,33 @@ public class ArbitroServlet extends HttpServlet {
                 /*
                 Inserte su código aquí
                 */
+                String busqueda = request.getParameter("tipo");
+                String buscar = request.getParameter("buscar");
+                switch (busqueda){
+                    case "nombre":
 
+                        listaArbitros = daoArbitros.busquedaNombre(buscar);
+                        request.setAttribute("arbitros",listaArbitros);
+                        request.setAttribute("buscarPor",opciones);
+                        request.setAttribute("buscado",buscar);
+                        request.setAttribute("tipo",busqueda);
+                        view = request.getRequestDispatcher("/arbitros/list.jsp");
+                        view.forward(request, response);
 
+                        break;
+
+                    case "pais":
+
+                        listaArbitros = daoArbitros.busquedaPais(buscar);
+                        request.setAttribute("arbitros",listaArbitros);
+                        request.setAttribute("buscarPor",opciones);
+                        request.setAttribute("buscado",buscar);
+                        request.setAttribute("tipo",busqueda);
+                        view = request.getRequestDispatcher("/arbitros/list.jsp");
+                        view.forward(request, response);
+
+                        break;
+                }
 
                 break;
 
@@ -34,6 +62,15 @@ public class ArbitroServlet extends HttpServlet {
                 /*
                 Inserte su código aquí
                 */
+                Arbitro arbitro = new Arbitro();
+
+                arbitro.setNombre(request.getParameter("nombre"));
+                arbitro.setPais(request.getParameter("pais"));
+
+                daoArbitros.crearArbitro(arbitro);
+
+                response.sendRedirect(request.getContextPath()+"/ArbitroServlet");
+
                 break;
 
         }
@@ -62,6 +99,11 @@ public class ArbitroServlet extends HttpServlet {
                 /*
                 Inserte su código aquí
                  */
+                ArrayList<Arbitro> listaArbitros = new ArrayList<>();
+                listaArbitros = daoArbitros.listarArbitros();
+                request.setAttribute("arbitros",listaArbitros);
+                request.setAttribute("buscarPor",opciones);
+
                 view = request.getRequestDispatcher("/arbitros/list.jsp");
                 view.forward(request, response);
                 break;
@@ -69,9 +111,9 @@ public class ArbitroServlet extends HttpServlet {
                 /*
                 Inserte su código aquí
                 */
+                request.setAttribute("paises",paises);
 
-                request.setAttribute("paises",opciones);
-                view = request.getRequestDispatcher("arbritos/form.jsp");
+                view = request.getRequestDispatcher("arbitros/form.jsp");
                 view.forward(request, response);
 
                 break;
@@ -80,7 +122,10 @@ public class ArbitroServlet extends HttpServlet {
                 Inserte su código aquí
                 */
 
-                daoArbitros.borrarArbitro(String id);
+                int idArbitro = Integer.parseInt(request.getParameter("id"));
+                daoArbitros.borrarArbitro(idArbitro);
+
+                response.sendRedirect(request.getContextPath()+"/ArbitroServlet");
 
 
                 break;
