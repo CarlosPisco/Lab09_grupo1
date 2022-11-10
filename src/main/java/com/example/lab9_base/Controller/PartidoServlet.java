@@ -42,6 +42,18 @@ public class PartidoServlet extends HttpServlet {
                     view = request.getRequestDispatcher("partidos/form.jsp");
                     view.forward(request, response);
                 }
+                ArrayList<Partido> listarPartidos = daoP.listaDePartidos();
+                for(Partido p : listarPartidos){
+                    if(p.getSeleccionVisitante().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion() & p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion()){
+                        ArrayList<Seleccion> listarSelecciones = daoS.listarSelecciones();
+                        ArrayList<Arbitro> listarArbitros = daoA.listarArbitros();
+                        request.setAttribute("listarSelecciones", listarSelecciones);
+                        request.setAttribute("listarArbitros", listarArbitros);
+                        request.setAttribute("error2", "No se puede repetir el partido");
+                        view = request.getRequestDispatcher("partidos/form.jsp");
+                        view.forward(request, response);
+                    }
+                }
                 Arbitro arbitro = new Arbitro();
                 arbitro.setIdArbitro(Integer.parseInt(request.getParameter("arbitro")));
                 partido.setArbitro(arbitro);
