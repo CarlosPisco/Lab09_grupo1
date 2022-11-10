@@ -20,6 +20,8 @@ public class PartidoServlet extends HttpServlet {
         String action = request.getParameter("action") == null ? "guardar" : request.getParameter("action");
         RequestDispatcher view;
         DaoPartidos daoP = new DaoPartidos();
+        DaoSelecciones daoS = new DaoSelecciones();
+        DaoArbitros daoA = new DaoArbitros();
         switch (action) {
             case "guardar":
                 Partido partido = new Partido();
@@ -31,11 +33,20 @@ public class PartidoServlet extends HttpServlet {
                 Seleccion visitante = new Seleccion();
                 visitante.setIdSeleccion(Integer.parseInt(request.getParameter("visitante")));
                 partido.setSeleccionVisitante(visitante);
+                if(partido.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion()){
+                    ArrayList<Seleccion> listarSelecciones = daoS.listarSelecciones();
+                    ArrayList<Arbitro> listarArbitros = daoA.listarArbitros();
+                    request.setAttribute("listarSelecciones", listarSelecciones);
+                    request.setAttribute("listarArbitros", listarArbitros);
+                    request.setAttribute("error1", "Las selecciones local y visitante deben ser diferentes");
+                    view = request.getRequestDispatcher("partidos/form.jsp");
+                    view.forward(request, response);
+                }
                 Arbitro arbitro = new Arbitro();
                 arbitro.setIdArbitro(Integer.parseInt(request.getParameter("arbitro")));
                 partido.setArbitro(arbitro);
                 daoP.crearPartido(partido);
-                response.sendRedirect(request.getContextPath() + "/PartidoServlet?action=lsita");
+                response.sendRedirect(request.getContextPath() + "/PartidoServlet?action=lista");
                 break;
 
         }

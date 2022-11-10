@@ -4,10 +4,7 @@ import com.example.lab9_base.Bean.Arbitro;
 import com.example.lab9_base.Bean.Estadio;
 import com.example.lab9_base.Bean.Seleccion;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoArbitros extends DaoBase{
@@ -32,9 +29,6 @@ public class DaoArbitros extends DaoBase{
     }
 
     public void crearArbitro(Arbitro arbitro) {
-        /*
-        Inserte su código aquí
-        */
         
         String sql = "insert into arbitro (nombre,pais) values (?,?)";
 
@@ -58,9 +52,6 @@ public class DaoArbitros extends DaoBase{
     public ArrayList<Arbitro> busquedaPais(String pais) {
 
         ArrayList<Arbitro> arbitros = new ArrayList<>();
-        /*
-        Inserte su código aquí
-        */
         String sql = "select * \n" +
                 "\tfrom arbitro\n" +
                 "\twhere pais = ?";
@@ -90,9 +81,6 @@ public class DaoArbitros extends DaoBase{
     public ArrayList<Arbitro> busquedaNombre(String nombre) {
 
         ArrayList<Arbitro> arbitros = new ArrayList<>();
-        /*
-        Inserte su código aquí
-        */
         String sql = "select *\n" +
                 "                from arbitro\n" +
                 "                where nombre like \"%?%\"";
@@ -125,9 +113,6 @@ public class DaoArbitros extends DaoBase{
 
     public Arbitro buscarArbitro(int id) {
         Arbitro arbitro = new Arbitro();
-        /*
-        Inserte su código aquí
-        */
         String sql = "select * from arbitro where idArbitro = ?";
 
         try (Connection conn = getConnection();
@@ -155,9 +140,6 @@ public class DaoArbitros extends DaoBase{
     }
 
     public void borrarArbitro(int id) {
-        /*
-        Inserte su código aquí
-        */
         String sql = "Delete from arbitro where idArbitro = ?";
 
             try (Connection conn = getConnection();

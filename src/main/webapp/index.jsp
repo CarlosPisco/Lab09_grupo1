@@ -41,8 +41,8 @@
                     <td><%=partido.getNumeroJornada()%></td>
                     <td><%=partido.getFecha()%></td>
                     <td><%=partido.getSeleccionLocal().getNombre()%></td>
-                    <td><%=partido.getSeleccionVisitante().getIdSeleccion()%></td>
-                    <td><%=partido.getSeleccionLocal().getEstadio().getNombre()%></td>
+                    <td><%=partido.getSeleccionVisitante().getNombre()%></td>
+                    <td><%=partido.getEstadio().getNombre()%></td>
                     <td><%=partido.getArbitro().getNombre()%></td>
                 </tr>
                 <% } %>
