@@ -4,9 +4,18 @@ public class Partido {
     private int idPartido;
     private String fecha;
     private int numeroJornada;
-    private SeleccionNacional seleccionLocal;
-    private SeleccionNacional seleccionVisitante;
+    private Seleccion seleccionLocal;
+    private Seleccion seleccionVisitante;
     private Arbitro arbitro;
+    private Estadio estadio;
+
+    public Estadio getEstadio() {
+        return estadio;
+    }
+
+    public void setEstadio(Estadio estadio) {
+        this.estadio = estadio;
+    }
 
     public int getIdPartido() {
         return idPartido;
@@ -32,19 +41,19 @@ public class Partido {
         this.numeroJornada = numeroJornada;
     }
 
-    public SeleccionNacional getSeleccionLocal() {
+    public Seleccion getSeleccionLocal() {
         return seleccionLocal;
     }
 
-    public void setSeleccionLocal(SeleccionNacional seleccionLocal) {
+    public void setSeleccionLocal(Seleccion seleccionLocal) {
         this.seleccionLocal = seleccionLocal;
     }
 
-    public SeleccionNacional getSeleccionVisitante() {
+    public Seleccion getSeleccionVisitante() {
         return seleccionVisitante;
     }
 
-    public void setSeleccionVisitante(SeleccionNacional seleccionVisitante) {
+    public void setSeleccionVisitante(Seleccion seleccionVisitante) {
         this.seleccionVisitante = seleccionVisitante;
     }
 
