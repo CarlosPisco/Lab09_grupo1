@@ -124,7 +124,15 @@ public class ArbitroServlet extends HttpServlet {
                 break;
             case "borrar":
                 int idArbitro = Integer.parseInt(request.getParameter("id"));
-                daoArbitros.borrarArbitro(idArbitro);
+                if(daoArbitros.buscarArbitro(idArbitro)!=null){
+                    try{
+                        daoArbitros.borrarArbitro(idArbitro);
+                    }catch (SQLException e) {
+                        response.sendRedirect(request.getContextPath() + "/ArbitroServlet");
+                    }
+                    
+                }
+                
 
                 response.sendRedirect(request.getContextPath()+"/ArbitroServlet");
 
