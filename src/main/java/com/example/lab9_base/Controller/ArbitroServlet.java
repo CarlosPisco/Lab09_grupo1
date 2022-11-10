@@ -7,6 +7,7 @@ import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 @WebServlet(name = "ArbitroServlet", urlPatterns = {"/ArbitroServlet"})
@@ -125,12 +126,8 @@ public class ArbitroServlet extends HttpServlet {
             case "borrar":
                 int idArbitro = Integer.parseInt(request.getParameter("id"));
                 if(daoArbitros.buscarArbitro(idArbitro)!=null){
-                    try{
-                        daoArbitros.borrarArbitro(idArbitro);
-                    }catch (SQLException e) {
-                        response.sendRedirect(request.getContextPath() + "/ArbitroServlet");
-                    }
-                    
+                    daoArbitros.borrarArbitro(idArbitro);
+
                 }
                 
 
