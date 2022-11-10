@@ -149,7 +149,29 @@ public class DaoArbitros extends DaoBase{
                 pstm.executeUpdate();
 
             } catch (SQLException e) {
-                throw new RuntimeException(e);
+                sql = "Delete from partido where arbitro = ?";
+
+                try (Connection conn = getConnection();
+
+                     PreparedStatement pstm = conn.prepareStatement(sql)) {
+                    pstm.setInt(1, id);
+                    pstm.executeUpdate();
+
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+                sql = "Delete from arbitro where idArbitro = ?";
+
+                try (Connection conn = getConnection();
+
+                     PreparedStatement pstm = conn.prepareStatement(sql)) {
+                    pstm.setInt(1,id);
+                    pstm.executeUpdate();
+
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
             }
         
     }
