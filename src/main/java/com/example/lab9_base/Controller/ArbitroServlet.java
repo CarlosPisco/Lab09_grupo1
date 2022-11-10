@@ -80,7 +80,7 @@ public class ArbitroServlet extends HttpServlet {
                 Inserte su código aquí
                 */
 
-                daoArbitros.borrarArbitro(String id);
+                //daoArbitros.borrarArbitro(String id);
 
 
                 break;

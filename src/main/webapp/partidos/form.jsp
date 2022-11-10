@@ -38,30 +38,35 @@
                                 <% for (Seleccion seleccion : listarSelecciones) { %>
                                 <option value="<%=seleccion.getIdSeleccion()%>" ><%=seleccion.getNombre()%></option>
                                 <% } %>
-                                <%if(error1!=null){%>
-                                <div id="validationServer" class="invalid-tooltip">
-                                    <%=error1%>
-                                </div>
-                                <%}%>
-                                <%if(error2!=null){%>
-                                <div id="validationServer" class="invalid-tooltip">
-                                    <%=error2%>
-                                </div>
-                                <%}%>
                             </select>
+                            <%if(error1!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error1%>
+                            </div>
+                            <%}%>
+                            <%if(error2!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error2%>
+                            </div>
+                            <%}%>
                         </div>
                         <div class="form-group">
                             <label>Selección Visitante</label>
-                            <select name="visitante" class="form-control <%=error1!=null?"is-invalid":""%>" required>
+                            <select name="visitante" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" required>
                                 <% for (Seleccion seleccion : listarSelecciones) { %>
                                 <option value="<%=seleccion.getIdSeleccion()%>" ><%=seleccion.getNombre()%></option>
                                 <% } %>
-                                <%if(error1!=null){%>
-                                <div id="validationServer" class="invalid-tooltip">
-                                    <%=error1%>
-                                </div>
-                                <%}%>
                             </select>
+                            <%if(error1!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error1%>
+                            </div>
+                            <%}%>
+                            <%if(error2!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error2%>
+                            </div>
+                            <%}%>
                         </div>
                         <div class="form-group">
                             <label>Árbitro</label>

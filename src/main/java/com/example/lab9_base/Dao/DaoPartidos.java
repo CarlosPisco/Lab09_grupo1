@@ -14,12 +14,12 @@ public class DaoPartidos extends DaoBase {
     public ArrayList<Partido> listaDePartidos() {
 
         ArrayList<Partido> partidos = new ArrayList<>();
-        String sql = "select *, sl.nombre as `local`, sv.nombre as `visit`, e.nombre as `estadioLocal`,a.nombre as `aname`\n" +
+        String sql = "select p.idPartido, p.numeroJornada, p.fecha, sl.idSeleccion, sl.nombre , sv.idSeleccion, sv.nombre , e.nombre, e.idEstadio ,a.nombre, a.idArbitro \n" +
                 "from partido p\n" +
                 "inner join arbitro a on p.arbitro = a.idArbitro\n" +
                 "inner join seleccion sl on sl.idSeleccion = p.seleccionLocal\n" +
                 "inner join seleccion sv on sv.idSeleccion = p.seleccionVisitante\n" +
-                "inner join estadio e on sl.estadio_idEstadio = e.idEstadio";
+                "inner join estadio e on sl.estadio_idEstadio = e.idEstadio;";
         try (Connection conn = getConnection();
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -27,20 +27,24 @@ public class DaoPartidos extends DaoBase {
             while (rs.next()) {
                 Partido partido = new Partido();
 
-                partido.setIdPartido(rs.getInt("idPartido"));
-                partido.setNumeroJornada(rs.getInt("numeroJornada"));
-                partido.setFecha(rs.getString("fecha"));
+                partido.setIdPartido(rs.getInt("p.idPartido"));
+                partido.setNumeroJornada(rs.getInt("p.numeroJornada"));
+                partido.setFecha(rs.getString("p.fecha"));
                 Seleccion local = new Seleccion();
-                local.setNombre(rs.getString("local"));
+                local.setNombre(rs.getString("sl.nombre"));
+                local.setIdSeleccion(rs.getInt("sl.idSeleccion"));
                 partido.setSeleccionLocal(local);
                 Seleccion visitante = new Seleccion();
-                visitante.setNombre(rs.getString("visit"));
+                visitante.setNombre(rs.getString("sv.nombre"));
+                visitante.setIdSeleccion(rs.getInt("sv.idSeleccion"));
                 partido.setSeleccionVisitante(visitante);
                 Estadio estadioLocal = new Estadio();
-                estadioLocal.setNombre(rs.getString("estadioLocal"));
+                estadioLocal.setNombre(rs.getString("e.nombre"));
+                estadioLocal.setIdEstadio(rs.getInt("e.idEstadio"));
                 partido.setEstadio(estadioLocal);
                 Arbitro arbitro = new Arbitro();
-                arbitro.setNombre(rs.getString("aname"));
+                arbitro.setNombre(rs.getString("a.nombre"));
+                arbitro.setIdArbitro(rs.getInt("a.idArbitro"));
                 partido.setArbitro(arbitro);
 
                 partidos.add(partido);

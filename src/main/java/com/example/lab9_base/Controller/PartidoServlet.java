@@ -22,6 +22,7 @@ public class PartidoServlet extends HttpServlet {
         DaoPartidos daoP = new DaoPartidos();
         DaoSelecciones daoS = new DaoSelecciones();
         DaoArbitros daoA = new DaoArbitros();
+        aea:
         switch (action) {
             case "guardar":
                 Partido partido = new Partido();
@@ -41,10 +42,13 @@ public class PartidoServlet extends HttpServlet {
                     request.setAttribute("error1", "Las selecciones local y visitante deben ser diferentes");
                     view = request.getRequestDispatcher("partidos/form.jsp");
                     view.forward(request, response);
+                    break;
                 }
                 ArrayList<Partido> listarPartidos = daoP.listaDePartidos();
                 for(Partido p : listarPartidos){
-                    if(p.getSeleccionVisitante().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion() & p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion()){
+                    System.out.println("ok");
+                    if((p.getSeleccionVisitante().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion()) && (p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion())){
+                        System.out.println("Aea");
                         ArrayList<Seleccion> listarSelecciones = daoS.listarSelecciones();
                         ArrayList<Arbitro> listarArbitros = daoA.listarArbitros();
                         request.setAttribute("listarSelecciones", listarSelecciones);
@@ -52,6 +56,7 @@ public class PartidoServlet extends HttpServlet {
                         request.setAttribute("error2", "No se puede repetir el partido");
                         view = request.getRequestDispatcher("partidos/form.jsp");
                         view.forward(request, response);
+                        break aea;
                     }
                 }
                 Arbitro arbitro = new Arbitro();
