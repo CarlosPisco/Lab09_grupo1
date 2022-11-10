@@ -1,4 +1,8 @@
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
+<% ArrayList<String> paises = (ArrayList<String>) request.getAttribute("paises");%>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -19,12 +23,16 @@
                     <form method="POST" action="<%=request.getContextPath()%>/ArbitroServlet?action=guardar">
                         <div class="form-group">
                             <label>Nombre</label>
-                            <input type="text" class="form-control" name="nombre">
+                            <input type="text" class="form-control" name="nombre" required>
                         </div>
                         <div class="form-group">
                             <label>País</label>
-                            <select name="pais" class="form-control">
+                            <select name="pais" class="form-control" required>
                                 <%--  COLOCAR LISTA DE PAÍSES BRINDADA EN EL SERVLET--%>
+                                    <% for (String a : paises) { %>
+                                    <option value="pais" >a</option>
+                                    <% } %>
+
                             </select>
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar</button>

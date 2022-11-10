@@ -1,5 +1,6 @@
 package com.example.lab9_base.Controller;
 
+import com.example.lab9_base.Dao.DaoArbitros;
 import jakarta.servlet.*;
 import jakarta.servlet.http.*;
 import jakarta.servlet.annotation.*;
@@ -24,6 +25,9 @@ public class ArbitroServlet extends HttpServlet {
                 /*
                 Inserte su código aquí
                 */
+
+
+
                 break;
 
             case "guardar":
@@ -51,6 +55,8 @@ public class ArbitroServlet extends HttpServlet {
         opciones.add("nombre");
         opciones.add("pais");
 
+        DaoArbitros daoArbitros = new DaoArbitros();
+
         switch (action) {
             case "lista":
                 /*
@@ -64,11 +70,19 @@ public class ArbitroServlet extends HttpServlet {
                 Inserte su código aquí
                 */
 
+                request.setAttribute("paises",opciones);
+                view = request.getRequestDispatcher("arbritos/form.jsp");
+                view.forward(request, response);
+
                 break;
             case "borrar":
                 /*
                 Inserte su código aquí
                 */
+
+                daoArbitros.borrarArbitro(String id);
+
+
                 break;
         }
     }

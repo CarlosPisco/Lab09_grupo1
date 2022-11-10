@@ -4,10 +4,7 @@ import com.example.lab9_base.Bean.Arbitro;
 import com.example.lab9_base.Bean.Estadio;
 import com.example.lab9_base.Bean.Seleccion;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 
 public class DaoArbitros extends DaoBase{
