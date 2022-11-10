@@ -14,9 +14,6 @@ public class DaoPartidos extends DaoBase {
     public ArrayList<Partido> listaDePartidos() {
 
         ArrayList<Partido> partidos = new ArrayList<>();
-        /*
-        Inserte su código aquí
-        */
         String sql = "select *, sl.nombre as `local`, sv.nombre as `visit`, e.nombre as `estadioLocal`,a.nombre as `aname`\n" +
                 "from partido p\n" +
                 "inner join arbitro a on p.arbitro = a.idArbitro\n" +
@@ -60,10 +57,6 @@ public class DaoPartidos extends DaoBase {
 
     public void crearPartido(Partido partido) {
 
-        /*
-        Inserte su código aquí
-        */
-
 
         String sql = "insert into partido (fecha,numeroJornada,seleccionlocal,seleccionVisitante,arbitro) values (?,?,?,?,?)";
 
@@ -72,9 +65,9 @@ public class DaoPartidos extends DaoBase {
 
             pstm.setString(1,partido.getFecha());
             pstm.setInt(2,partido.getNumeroJornada());
-            pstm.setString(3,partido.getSeleccionLocal().getNombre());
-            pstm.setString(4,partido.getSeleccionVisitante().getNombre());
-            pstm.setString(5,partido.getArbitro().getNombre());
+            pstm.setInt(3,partido.getSeleccionLocal().getIdSeleccion());
+            pstm.setInt(4,partido.getSeleccionVisitante().getIdSeleccion());
+            pstm.setInt(5,partido.getArbitro().getIdArbitro());
 
             pstm.executeUpdate();
 
