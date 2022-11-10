@@ -29,7 +29,7 @@ public class DaoSelecciones extends DaoBase {
                 estadio.setProvincia(rs.getString(6));
                 estadio.setClub(rs.getString(7));
                 seleccion.setEstadio(estadio);
-                listarSelecciones().add(seleccion);
+                selecciones.add(seleccion);
 
             }
 
