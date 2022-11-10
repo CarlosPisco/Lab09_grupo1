@@ -123,6 +123,8 @@ public class ArbitroServlet extends HttpServlet {
                 */
 
                 int idArbitro = Integer.parseInt(request.getParameter("id"));
+
+
                 daoArbitros.borrarArbitro(idArbitro);
 
                 response.sendRedirect(request.getContextPath()+"/ArbitroServlet");
