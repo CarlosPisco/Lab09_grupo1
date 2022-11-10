@@ -4,6 +4,7 @@
 <jsp:useBean type="java.util.ArrayList<com.example.lab9_base.Bean.Seleccion>" scope="request" id="listarSelecciones"/>
 <jsp:useBean type="java.util.ArrayList<com.example.lab9_base.Bean.Arbitro>" scope="request" id="listarArbitros"/>
 <%String error1 = (String) request.getAttribute("error1");%>
+<%String error2 = (String) request.getAttribute("error2");%>
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -33,29 +34,39 @@
                         </div>
                         <div class="form-group">
                             <label>Selección local</label>
-                            <select name="local" class="form-control <%=error1!=null?"is-invalid":""%>" required>
+                            <select name="local" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" required>
                                 <% for (Seleccion seleccion : listarSelecciones) { %>
                                 <option value="<%=seleccion.getIdSeleccion()%>" ><%=seleccion.getNombre()%></option>
                                 <% } %>
-                                <%if(error1!=null){%>
-                                <div id="validationServer" class="invalid-tooltip">
-                                    <%=error1%>
-                                </div>
-                                <%}%>
                             </select>
+                            <%if(error1!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error1%>
+                            </div>
+                            <%}%>
+                            <%if(error2!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error2%>
+                            </div>
+                            <%}%>
                         </div>
                         <div class="form-group">
                             <label>Selección Visitante</label>
-                            <select name="visitante" class="form-control <%=error1!=null?"is-invalid":""%>" required>
+                            <select name="visitante" class="form-control <%=error1!=null?"is-invalid":""%> <%=error2!=null?"is-invalid":""%>" required>
                                 <% for (Seleccion seleccion : listarSelecciones) { %>
                                 <option value="<%=seleccion.getIdSeleccion()%>" ><%=seleccion.getNombre()%></option>
                                 <% } %>
-                                <%if(error1!=null){%>
-                                <div id="validationServer" class="invalid-tooltip">
-                                    <%=error1%>
-                                </div>
-                                <%}%>
                             </select>
+                            <%if(error1!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error1%>
+                            </div>
+                            <%}%>
+                            <%if(error2!=null){%>
+                            <div id="validationServer" class="invalid-tooltip">
+                                <%=error2%>
+                            </div>
+                            <%}%>
                         </div>
                         <div class="form-group">
                             <label>Árbitro</label>
