@@ -5,8 +5,14 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css' />
         <title>LAB 9</title>
+
     </head>
     <body>
+        <div class = "container-fluid">
+                <jsp:include page="/includes/navbar.jsp">
+                    <jsp:param name="page" value="inicio"/>
+                </jsp:include>
+        </div>
         <div class='container'>
             <div class="row mb-5 mt-4">
                 <div class="col-lg-6">

@@ -38,9 +38,9 @@ public class PartidoServlet extends HttpServlet {
                 view.forward(request, response);
                 break;
             case "crear":
-                /*
-                Inserte su código aquí
-                 */
+
+                view = request.getRequestDispatcher("partidos/form.jsp");
+                view.forward(request, response);
                 break;
 
         }

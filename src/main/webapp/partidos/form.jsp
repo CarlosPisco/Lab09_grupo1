@@ -6,6 +6,11 @@
         <title>LAB 9</title>
     </head>
     <body>
+        <div class = "container-fluid">
+            <jsp:include page="/includes/navbar.jsp">
+                <jsp:param name="page" value="inicio"/>
+            </jsp:include>
+        </div>
         <div class='container'>
             <div class="row mb-4">
                 <div class="col"></div>
@@ -14,28 +19,28 @@
                     <form method="POST" action="<%=request.getContextPath()%>/PartidoServlet?action=guardar">
                         <div class="form-group">
                             <label>Jornada</label>
-                            <input type="number" class="form-control" name="jornada">
+                            <input type="number" class="form-control" name="jornada" required>
                         </div>
                         <div class="form-group">
                             <label>Fecha</label>
                             <input class="form-control datetimepicker" id="fecha" name="fecha"
-                                   type="date"/>
+                                   type="date" required/>
                         </div>
                         <div class="form-group">
                             <label>Selección local</label>
-                            <select name="local" class="form-control">
+                            <select name="local" class="form-control" required>
                                 <%--                       COLOCAR LISTA DE SELECCIONES DE LA BASE DE DATOS--%>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Selección Visitante</label>
-                            <select name="visitante" class="form-control">
+                            <select name="visitante" class="form-control" required>
                                 <%--                        COLOCAR LISTA DE SELECCIONES DE LA BASE DE DATOS--%>
                             </select>
                         </div>
                         <div class="form-group">
                             <label>Árbitro</label>
-                            <select name="arbitro" class="form-control">
+                            <select name="arbitro" class="form-control" required>
                                 <%--                        COLOCAR LISTA DE ÁRBITRO DE LA BASE DE DATOS--%>
                             </select>
                         </div>
