@@ -7,6 +7,15 @@ public class Partido {
     private Seleccion seleccionLocal;
     private Seleccion seleccionVisitante;
     private Arbitro arbitro;
+    private Estadio estadio;
+
+    public Estadio getEstadio() {
+        return estadio;
+    }
+
+    public void setEstadio(Estadio estadio) {
+        this.estadio = estadio;
+    }
 
     public int getIdPartido() {
         return idPartido;
