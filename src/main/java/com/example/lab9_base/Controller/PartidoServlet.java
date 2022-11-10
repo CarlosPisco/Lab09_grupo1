@@ -46,9 +46,7 @@ public class PartidoServlet extends HttpServlet {
                 }
                 ArrayList<Partido> listarPartidos = daoP.listaDePartidos();
                 for(Partido p : listarPartidos){
-                    System.out.println("ok");
                     if((p.getSeleccionVisitante().getIdSeleccion()==partido.getSeleccionVisitante().getIdSeleccion()) && (p.getSeleccionLocal().getIdSeleccion()==partido.getSeleccionLocal().getIdSeleccion())){
-                        System.out.println("Aea");
                         ArrayList<Seleccion> listarSelecciones = daoS.listarSelecciones();
                         ArrayList<Arbitro> listarArbitros = daoA.listarArbitros();
                         request.setAttribute("listarSelecciones", listarSelecciones);
