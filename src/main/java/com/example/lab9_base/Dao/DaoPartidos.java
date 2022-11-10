@@ -8,7 +8,7 @@ import com.example.lab9_base.Bean.Seleccion;
 import java.sql.*;
 import java.util.ArrayList;
 
-public class DaoPartidos extends DaoBase{
+public class DaoPartidos extends DaoBase {
 
 
     public ArrayList<Partido> listaDePartidos() {
@@ -27,7 +27,7 @@ public class DaoPartidos extends DaoBase{
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
 
-            while(rs.next()){
+            while (rs.next()) {
                 Partido partido = new Partido();
 
                 partido.setIdPartido(rs.getInt("idPartido"));
@@ -52,17 +52,36 @@ public class DaoPartidos extends DaoBase{
             }
 
 
-
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return partidos;
     }
 
-        public void crearPartido(Partido partido) {
+    public void crearPartido(Partido partido) {
 
         /*
         Inserte su código aquí
         */
+
+
+        String sql = "insert into partido (fecha,numeroJornada,seleccionlocal,seleccionVisitante,arbitro) values (?,?,?,?,?)";
+
+        try (Connection conn = getConnection();
+             PreparedStatement pstm = conn.prepareStatement(sql)) {
+
+            pstm.setString(1,partido.getFecha());
+            pstm.setInt(2,partido.getNumeroJornada());
+            pstm.setString(3,partido.getSeleccionLocal().getNombre());
+            pstm.setString(4,partido.getSeleccionVisitante().getNombre());
+            pstm.setString(5,partido.getArbitro().getNombre());
+
+            pstm.executeUpdate();
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+
     }
 }
